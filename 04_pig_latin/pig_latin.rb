@@ -1,26 +1,37 @@
 VOWELS = ["a", "e", "i", "o", "u"]
 
-def translate(words)
-  words.split.map { |word| translate_word(word) }.join(" ")
+def is_vowel(character)
+  VOWELS.include?(character)
+end
+
+def get_initial_consonants(word)
+  word_letters = word.split('')
+  
+  # need to track prev_letter to handle "qu" rule
+  prev_letter = nil
+  initial_consonants = []
+  word_letters.each do |letter|
+    break if is_vowel(letter) && !(letter == "u" && prev_letter == "q")
+    initial_consonants << letter
+    
+    prev_letter = letter
+  end
+  
+  initial_consonants.join
 end
 
 def translate_word(word)
-  prefix = []
-  rest = []
+  initial_consonants = get_initial_consonants(word)
   
-  prefix_ended = false
-  word.split("").each_with_index do |letter, index|
-    if prefix_ended
-      rest << letter
-    elsif not VOWELS.include?(letter)
-      prefix << letter
-    elsif (letter == "u") and (index > 0) and (word[index - 1] == "q")
-      prefix << letter
-    else
-      prefix_ended = true
-      rest << letter
-    end
-  end
+  num_initial_consonants = initial_consonants.size
+  rest_of_phrase = word[num_initial_consonants, word.length -
+    num_initial_consonants]
   
-  (rest + prefix + ["a", "y"]).join
+  rest_of_phrase + initial_consonants + "ay"
+end
+
+def translate(phrase)
+  translated_words = phrase.split.map { |word| translate_word(word) }
+  
+  translated_words.join(" ")
 end
