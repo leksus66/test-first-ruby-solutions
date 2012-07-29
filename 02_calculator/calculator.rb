@@ -1,28 +1,46 @@
-def add(i, j)
-  i + j
+def add(num1, num2)
+  num1 + num2
 end
 
-def subtract(i, j)
-  i - j
+def subtract(num1, num2)
+  num1 - num2
 end
 
-def sum(numbers)
-  numbers.inject(0, :+)
-end
+def sum(nums)
+  total = 0
 
-def multiply(numbers)
-  numbers.inject(1, :*)
-end
-
-def power(i, j)
-  prod = 1
-  j.times do
-    prod *= i
+  nums.each do |num|
+    total += num
   end
   
-  prod
+  total
+end
+
+def multiply(nums)
+  total = 1
+  
+  nums.each do |num|
+    total *= num
+  end
+  
+  total
+end
+
+def power(base, exponent)
+  nums = []
+
+  exponent.times do
+    nums << base
+  end
+  
+  multiply(nums)
 end
 
 def factorial(i)
-  multiply((1..i).to_a)
+  if i == 0
+    puts "BASE: 0! = 1"
+    1
+  else
+    i * factorial(i - 1)
+  end
 end
