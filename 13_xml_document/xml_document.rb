@@ -19,7 +19,7 @@ class XmlDocument
       body = yield
       self.indent_level -= 1 if self.indents
       
-      close_tag = (" " * indent_level) + "</#{tag_name}>" + (self.indents ?
+      close_tag = ("  " * indent_level) + "</#{tag_name}>" + (self.indents ?
         "\n" : "")
       
       [open_tag, body, close_tag].join
