@@ -38,7 +38,7 @@ end
 
 def factorial(i)
   if i == 0
-    puts "BASE: 0! = 1"
+    # this is the base case
     1
   else
     i * factorial(i - 1)
